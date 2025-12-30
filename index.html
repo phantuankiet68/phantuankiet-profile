@@ -1,0 +1,825 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Profile Dashboard</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="profile-card">
+          <div class="avatar-wrap">
+            <img class="avatar" src="./avatar.jpg" alt="Avatar" />
+            <span class="avatar-badge" title="Verified">✓</span>
+          </div>
+
+          <h1 class="name" data-i18n="sidebar.name"></h1>
+          <p class="handle" data-i18n="sidebar.title"></p>
+
+          <div class="tags tag-spacebetween">
+            <span class="tag w-48" data-i18n="sidebar.tags.ui"></span>
+            <span class="tag w-48" data-i18n="sidebar.tags.performance"></span>
+            <span class="tag w-48" data-i18n="sidebar.tags.product"></span>
+            <span class="tag w-48" data-i18n="sidebar.tags.learning"></span>
+            <span class="tag w-100" data-i18n="sidebar.tags.lowcode"></span>
+          </div>
+
+          <button class="btn btn-primary" data-i18n="sidebar.downloadCv"></button>
+
+          <div class="meta">
+            <div class="meta-row">
+              <span class="ic">📅</span>
+              <span data-i18n="sidebar.birth"></span>
+            </div>
+
+            <div class="meta-row">
+              <span class="ic">👤</span>
+              <span data-i18n="sidebar.gender"></span>
+            </div>
+
+            <div class="meta-row">
+              <span class="ic">📞</span>
+              <a class="link" href="tel:0768173369">0867105900</a>
+            </div>
+
+            <div class="meta-row">
+              <span class="ic">✉️</span>
+              <a class="link" href="mailto:tuankietcity@gmail.com">tuankietity@gmail.com</a>
+            </div>
+
+            <div class="meta-row">
+              <span class="ic">🔗</span>
+              <a class="link" href="https://github.com/TuanKietIT" target="_blank">github.com/TuanKietIT</a>
+            </div>
+          </div>
+
+          <!-- Education -->
+          <div class="sidebar-section">
+            <h3 class="section-title" data-i18n="sidebar.education.title"></h3>
+            <div class="meta">
+              <div class="meta-row">
+                <span class="ic">🎓</span>
+                <span data-i18n="sidebar.education.school"></span>
+              </div>
+              <div class="meta-row">
+                <span class="ic">📍</span>
+                <span data-i18n="sidebar.education.time"></span>
+              </div>
+              <div class="meta-row">
+                <span class="ic">📘</span>
+                <span data-i18n="sidebar.education.major"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Languages -->
+          <div class="sidebar-section">
+            <h3 class="section-title" data-i18n="sidebar.languages.title"></h3>
+            <div class="tags-education">
+              <span class="tag-education" data-i18n="sidebar.languages.en"></span>
+              <span class="tag-education" data-i18n="sidebar.languages.ja"></span>
+            </div>
+          </div>
+
+          <!-- Salary -->
+          <div class="sidebar-section">
+            <h3 class="section-title" data-i18n="sidebar.salary.title"></h3>
+            <div class="meta">
+              <div class="meta-row">
+                <span class="ic">💰</span>
+                <span data-i18n="sidebar.salary.value"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- RIGHT: Main -->
+      <main class="main">
+        <!-- Top nav -->
+        <header class="topbar">
+          <nav class="tabs" role="tablist" aria-label="Profile sections">
+            <button class="tab is-active" data-tab="intro" data-i18n="tabs.intro"></button>
+            <button class="tab" data-tab="education" data-i18n="tabs.education"></button>
+            <button class="tab" data-tab="skills" data-i18n="tabs.skills"></button>
+            <button class="tab" data-tab="experience" data-i18n="tabs.experience"></button>
+            <button class="tab" data-tab="products" data-i18n="tabs.products"></button>
+
+            <button class="tab" data-tab="design" data-i18n="tabs.design"></button>
+          </nav>
+
+          <div class="topbar-actions">
+            <div class="lang-switch">
+              <button class="icon-btn" id="langBtn" title="Ngôn ngữ">🌐</button>
+              <div class="lang-menu">
+                <button data-lang="vi">
+                  <img src="https://flagcdn.com/w20/vn.png" alt="VN" />
+                  Tiếng Việt
+                </button>
+
+                <button data-lang="en">
+                  <img src="https://flagcdn.com/w20/gb.png" alt="EN" />
+                  English
+                </button>
+                <button data-lang="ja">
+                  <img src="https://flagcdn.com/w20/jp.png" alt="JP" />
+                  日本語
+                </button>
+              </div>
+            </div>
+            <button class="icon-btn" title="Tin nhắn">💬</button>
+            <button class="icon-btn" title="Thông báo">🔔</button>
+            <button class="icon-btn" title="Cài đặt">⚙️</button>
+          </div>
+        </header>
+        <div class="tab-content">
+          <section class="tab-panel is-active intro" data-tab="intro">
+            <section class="hero">
+              <div class="hero-card">
+                <div class="hero-cover">
+                  <div class="cover-overlay">
+                    <div class="cover-kicker" data-i18n="hero.kicker">portfolio / about-me</div>
+
+                    <div class="cover-title">
+                      <div class="line1" data-i18n="hero.greeting">Xin chào, tôi là</div>
+                      <div class="line2" data-i18n="hero.name">Phan Tuấn Kiệt</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="hero-body">
+                  <p class="muted" data-i18n="hero.subtitle">Giới thiệu ngắn gọn 👋</p>
+
+                  <p data-i18n="hero.p1">
+                    Tôi là Web Developer với hơn 3 năm kinh nghiệm thực chiến trong phát triển ứng dụng web. Tôi có khả năng làm việc tốt với Single Page Application (SPA) , tham gia trực tiếp vào các
+                    dự án thực tế và từng có thời gian làm việc trong môi trường công ty Nhật .
+                  </p>
+
+                  <p data-i18n="hero.p2">
+                    Tôi phụ trách phát triển, chỉnh sửa và triển khai các website mới; đồng thời bảo trì, nâng cấp các hệ thống đang vận hành. Sau khi bàn giao, tôi theo dõi chất lượng và xử lý nhanh
+                    các vấn đề phát sinh, đặc biệt là các lỗi giao diện (UI) nhằm đảm bảo trải nghiệm người dùng ổn định.
+                  </p>
+
+                  <p data-i18n="hero.p3">
+                    Tôi có thể phát triển end-to-end từ
+                    <strong>Front-end đến Back-end</strong>
+                    , linh hoạt với
+                    <strong>MVC</strong>
+                    và
+                    <strong>SPA</strong>
+                    , không bị giới hạn trong một framework hay ngôn ngữ cụ thể. Tôi luôn ưu tiên
+                    <strong>hiệu năng</strong>
+                    ,
+                    <strong>trải nghiệm người dùng</strong>
+                    và
+                    <strong>tính ổn định</strong>
+                    trong quá trình vận hành sản phẩm.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <div class="card mt-10">
+              <div class="card-h">
+                <h3 data-i18n="collaboration.title">SẴN SÀNG HỢP TÁC</h3>
+              </div>
+
+              <div class="meta">
+                <div class="meta-row">
+                  <span class="ic">💼</span>
+                  <span data-i18n="collaboration.p1">
+                    Sẵn sàng tham gia các dự án
+                    <strong>Web / Frontend / Fullstack</strong>
+                    với môi trường làm việc chuyên nghiệp.
+                  </span>
+                </div>
+
+                <div class="meta-row">
+                  <span class="ic">🤝</span>
+                  <span data-i18n="collaboration.p2">
+                    Ưu tiên các dự án có
+                    <strong>tư duy sản phẩm</strong>
+                    , chú trọng trải nghiệm người dùng và chất lượng lâu dài.
+                  </span>
+                </div>
+
+                <div class="meta-row">
+                  <span class="ic">📍</span>
+                  <span data-i18n="collaboration.p3">
+                    Có thể làm việc
+                    <strong>Onsite / Remote / Hybrid</strong>
+                    (tuỳ theo yêu cầu dự án).
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <section class="grid mt-10">
+              <div class="card">
+                <h3 class="section-title" data-i18n="strengths.title"></h3>
+
+                <div class="meta strength-list">
+                  <div class="meta-row">
+                    <span class="ic">✅</span>
+                    <span data-i18n="strengths.items.idea"></span>
+                  </div>
+
+                  <div class="meta-row">
+                    <span class="ic">✅</span>
+                    <span data-i18n="strengths.items.tooling"></span>
+                  </div>
+
+                  <div class="meta-row">
+                    <span class="ic">✅</span>
+                    <span data-i18n="strengths.items.design"></span>
+                  </div>
+                </div>
+              </div>
+              <!-- Interests -->
+              <div class="card">
+                <h3 class="section-title" data-i18n="careerGoal.title"></h3>
+
+                <div class="meta strength-list">
+                  <div class="meta-row">
+                    <span class="ic">🎯</span>
+                    <span data-i18n="careerGoal.items.shortTerm"></span>
+                  </div>
+
+                  <div class="meta-row">
+                    <span class="ic">🚀</span>
+                    <span data-i18n="careerGoal.items.longTerm"></span>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </section>
+          <section class="tab-panel education" data-tab="education">
+            <ol class="edu-timeline">
+              <!-- 1) THCS -->
+              <li class="edu-item">
+                <span class="edu-dot" aria-hidden="true"></span>
+                <article class="edu-card">
+                  <div class="edu-head">
+                    <div class="edu-left">
+                      <h3 class="edu-level" data-i18n="education.items.secondary.level"></h3>
+                      <div class="edu-school" data-i18n="education.items.secondary.school"></div>
+                    </div>
+                    <span class="edu-time" data-i18n="education.items.secondary.time"></span>
+                  </div>
+
+                  <ul class="edu-points">
+                    <li data-i18n="education.items.secondary.points.p1"></li>
+                    <li data-i18n="education.items.secondary.points.p2"></li>
+                  </ul>
+                </article>
+              </li>
+
+              <!-- 2) THPT (Ngô Văn Cấn) -->
+              <li class="edu-item">
+                <span class="edu-dot" aria-hidden="true"></span>
+                <article class="edu-card">
+                  <div class="edu-head">
+                    <div class="edu-left">
+                      <h3 class="edu-level" data-i18n="education.items.high1.level"></h3>
+                      <div class="edu-school" data-i18n="education.items.high1.school"></div>
+                    </div>
+                    <span class="edu-time" data-i18n="education.items.high1.time"></span>
+                  </div>
+
+                  <ul class="edu-points">
+                    <li data-i18n="education.items.high1.points.p1"></li>
+                    <li data-i18n="education.items.high1.points.p2"></li>
+                  </ul>
+                </article>
+              </li>
+
+              <!-- 3) THPT (Nguyễn Bỉnh Khiêm) -->
+              <li class="edu-item">
+                <span class="edu-dot" aria-hidden="true"></span>
+                <article class="edu-card">
+                  <div class="edu-head">
+                    <div class="edu-left">
+                      <h3 class="edu-level" data-i18n="education.items.high2.level"></h3>
+                      <div class="edu-school" data-i18n="education.items.high2.school"></div>
+                    </div>
+                    <span class="edu-time" data-i18n="education.items.high2.time"></span>
+                  </div>
+
+                  <ul class="edu-points">
+                    <li data-i18n="education.items.high2.points.p1"></li>
+                    <li data-i18n="education.items.high2.points.p2"></li>
+                  </ul>
+                </article>
+              </li>
+
+              <!-- 4) Đại học -->
+              <li class="edu-item">
+                <span class="edu-dot" aria-hidden="true"></span>
+                <article class="edu-card">
+                  <div class="edu-head">
+                    <div class="edu-left">
+                      <h3 class="edu-level" data-i18n="education.items.university.level"></h3>
+                      <div class="edu-school" data-i18n="education.items.university.school"></div>
+                    </div>
+                    <span class="edu-time" data-i18n="education.items.university.time"></span>
+                  </div>
+
+                  <ul class="edu-points">
+                    <li data-i18n="education.items.university.points.gpa"></li>
+                    <li data-i18n="education.items.university.points.project"></li>
+                    <li data-i18n="education.items.university.points.jp"></li>
+                    <li data-i18n="education.items.university.points.grad"></li>
+                  </ul>
+                </article>
+              </li>
+
+              <!-- 5) Định hướng -->
+              <li class="edu-item">
+                <span class="edu-dot" aria-hidden="true"></span>
+                <article class="edu-card">
+                  <div class="edu-head">
+                    <div class="edu-left">
+                      <h3 class="edu-level" data-i18n="education.items.future.level"></h3>
+                      <div class="edu-school" data-i18n="education.items.future.school"></div>
+                    </div>
+                    <span class="edu-time" data-i18n="education.items.future.time"></span>
+                  </div>
+
+                  <ul class="edu-points">
+                    <li data-i18n="education.items.future.points.p1"></li>
+                    <li data-i18n="education.items.future.points.p2"></li>
+                  </ul>
+                </article>
+              </li>
+            </ol>
+          </section>
+
+          <section class="tab-panel" data-tab="skills">
+            <div class="skills-grid">
+              <!-- Card 1 -->
+              <article class="skills-card">
+                <h3 class="skills-card-title">Front-End</h3>
+
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">HTML</span>
+                    <span class="skill-val" data-value="90">90%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 90%"></span>
+                  </div>
+                </div>
+
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">CSS/Sass/SCSS</span>
+                    <span class="skill-val" data-value="70">70%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 70%"></span>
+                  </div>
+                </div>
+
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">JavaScript</span>
+                    <span class="skill-val" data-value="80">80%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 80%"></span>
+                  </div>
+                </div>
+
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">Bootstrap</span>
+                    <span class="skill-val" data-value="65">65%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 65%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">Tailwind CSS</span>
+                    <span class="skill-val" data-value="65">65%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 65%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">Responsive Design</span>
+                    <span class="skill-val" data-value="60">60%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 60%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">ReactJS</span>
+                    <span class="skill-val" data-value="70">70%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 70%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">VueJS</span>
+                    <span class="skill-val" data-value="75">75%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 75%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">Next.js</span>
+                    <span class="skill-val" data-value="70">70%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 70%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">Angular</span>
+                    <span class="skill-val" data-value="65">65%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 65%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">Three.js</span>
+                    <span class="skill-val" data-value="50">50%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 50%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">Canvas</span>
+                    <span class="skill-val" data-value="80">80%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 80%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">Animation (CSS/JS)</span>
+                    <span class="skill-val" data-value="60">60%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 60%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">Chart.js</span>
+                    <span class="skill-val" data-value="70">70%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 70%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">Figma</span>
+                    <span class="skill-val" data-value="70">70%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 70%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">NPM/Yarn</span>
+                    <span class="skill-val" data-value="80">80%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 80%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">Vite/Webpack</span>
+                    <span class="skill-val" data-value="70">70%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 70%"></span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 2 -->
+              <article class="skills-card">
+                <h3 class="skills-card-title">Back-End</h3>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">C / C++ / C#</span>
+                    <span class="skill-val" data-value="70">70%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 70%"></span>
+                  </div>
+                </div>
+
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">ASP.NET / MVC / VB.NET</span>
+                    <span class="skill-val" data-value="75">75%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 75%"></span>
+                  </div>
+                </div>
+
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">PHP / Laravel</span>
+                    <span class="skill-val" data-value="80">80%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 80%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">Node.js (Express, NestJS)</span>
+                    <span class="skill-val" data-value="80">80%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 80%"></span>
+                  </div>
+                </div>
+
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">Python</span>
+                    <span class="skill-val" data-value="60">60%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 60%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name">Java</span>
+                    <span class="skill-val" data-value="70">70%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 70%"></span>
+                  </div>
+                </div>
+                <h3 class="skills-card-title">Tools</h3>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name mt-2">Visual Studio / Visual Studio Code</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 100%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name mt-2">Git / GitHub / GitLab</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 100%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name mt-2">NPM / Yarn / Composer / NuGet</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 100%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name mt-2">Postman / Selenium Testing</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 100%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name mt-2">SourceThree / TortoiseGit</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 100%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name mt-2">UBUNTU (20.4, 22.4)</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 100%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name mt-2">Backlog</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 100%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name mt-2">FORM DESIGN SVF</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 100%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name mt-2">WINSCP</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 100%"></span>
+                  </div>
+                </div>
+                <div class="skill">
+                  <div class="skill-top">
+                    <span class="skill-name mt-2">FileZilla</span>
+                  </div>
+                  <div class="skill-bar">
+                    <span class="skill-fill" style="--val: 100%"></span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="tab-panel" data-tab="experience">
+            <div class="exp-section">
+              <ol class="exp-timeline">
+                <!-- Item 1 -->
+                <li class="exp-item">
+                  <span class="exp-dot" aria-hidden="true"></span>
+                  <article class="exp-card">
+                    <div class="exp-head">
+                      <div class="exp-left">
+                        <div class="exp-company" data-i18n="experience.onetech.company"></div>
+                        <div class="exp-role" data-i18n="experience.onetech.role"></div>
+                      </div>
+
+                      <div class="exp-meta">
+                        <span class="exp-date" data-i18n="experience.onetech.time"></span>
+                      </div>
+                    </div>
+
+                    <ul class="exp-list">
+                      <li data-i18n="experience.onetech.items.calendar"></li>
+                      <li data-i18n="experience.onetech.items.uiux"></li>
+                      <li data-i18n="experience.onetech.items.projects"></li>
+                      <li data-i18n="experience.onetech.items.tech"></li>
+                      <li data-i18n="experience.onetech.items.teamwork"></li>
+                      <li data-i18n="experience.onetech.items.foundation"></li>
+                      <li class="exp-link" data-i18n="experience.onetech.items.link"></li>
+                    </ul>
+                  </article>
+                </li>
+
+                <!-- Item 2 -->
+                <li class="exp-item">
+                  <span class="exp-dot" aria-hidden="true"></span>
+                  <article class="exp-card">
+                    <div class="exp-head">
+                      <div class="exp-left">
+                        <div class="exp-company" data-i18n="experience.vjp.company"></div>
+                        <div class="exp-role" data-i18n="experience.vjp.role"></div>
+                      </div>
+
+                      <div class="exp-meta">
+                        <span class="exp-date" data-i18n="experience.vjp.time"></span>
+                      </div>
+                    </div>
+
+                    <ul class="exp-list">
+                      <li data-i18n="experience.vjp.items.jpProcess"></li>
+                      <li data-i18n="experience.vjp.items.offshore"></li>
+                      <li data-i18n="experience.vjp.items.projects"></li>
+                      <li data-i18n="experience.vjp.items.uiux"></li>
+                      <li data-i18n="experience.vjp.items.frontend"></li>
+                      <li data-i18n="experience.vjp.items.backend"></li>
+                      <li data-i18n="experience.vjp.items.training"></li>
+                      <li class="exp-link" data-i18n="experience.vjp.items.link"></li>
+                    </ul>
+                  </article>
+                </li>
+
+                <li class="exp-item">
+                  <span class="exp-dot" aria-hidden="true"></span>
+                  <article class="exp-card">
+                    <div class="exp-head">
+                      <div class="exp-left">
+                        <div class="exp-company" data-i18n="experience.katsura.company"></div>
+                        <div class="exp-role" data-i18n="experience.katsura.role"></div>
+                      </div>
+
+                      <div class="exp-meta">
+                        <span class="exp-date" data-i18n="experience.katsura.time"></span>
+                      </div>
+                    </div>
+
+                    <ul class="exp-list">
+                      <li data-i18n="experience.katsura.items.uiux"></li>
+                      <li data-i18n="experience.katsura.items.report"></li>
+                      <li data-i18n="experience.katsura.items.vbnet"></li>
+                      <li data-i18n="experience.katsura.items.volume"></li>
+                      <li data-i18n="experience.katsura.items.testing"></li>
+                      <li data-i18n="experience.katsura.items.frontend"></li>
+                      <li data-i18n="experience.katsura.items.backend"></li>
+                    </ul>
+                  </article>
+                </li>
+              </ol>
+            </div>
+          </section>
+
+          <section class="tab-panel" data-tab="products">
+            <div class="product-grid" id="productGrid"></div>
+          </section>
+
+          <section class="tab-panel" data-tab="design">
+            <div class="design-grid" id="designGrid"></div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <dialog class="product-modal" id="productModal" aria-label="Chi tiết sản phẩm">
+      <button class="modal-close" type="button" aria-label="Đóng">✕</button>
+
+      <div class="modal-grid">
+        <div class="modal-media">
+          <img class="modal-img" src="" alt="" />
+          <span class="modal-badge" hidden></span>
+        </div>
+
+        <div class="modal-content">
+          <h3 class="modal-title"></h3>
+          <p class="modal-desc"></p>
+
+          <div class="modal-meta"></div>
+
+          <div class="modal-row">
+            <div class="modal-label">Tech</div>
+            <div class="modal-tech"></div>
+          </div>
+
+          <div class="modal-actions">
+            <a class="modal-btn primary" href="#" target="_blank" rel="noopener">Xem demo</a>
+            <button class="modal-btn" type="button" data-close>Đóng</button>
+          </div>
+        </div>
+      </div>
+    </dialog>
+    <dialog class="design-modal" id="designModal" aria-label="Chi tiết thiết kế">
+      <button class="dmodal-close" type="button" aria-label="Đóng">✕</button>
+
+      <div class="dmodal-grid">
+        <div class="dmodal-media">
+          <img class="dmodal-img" src="" alt="" />
+          <span class="dmodal-badge" hidden></span>
+        </div>
+
+        <div class="dmodal-content">
+          <h3 class="dmodal-title"></h3>
+          <p class="dmodal-desc"></p>
+
+          <div class="dmodal-meta">
+            <span class="dmodal-loc"></span>
+            <span class="dmodal-sep">•</span>
+            <span class="dmodal-rate">
+              <span class="dmodal-star">★</span>
+              <span class="dmodal-rateval"></span>
+            </span>
+          </div>
+
+          <div class="dmodal-actions">
+            <a class="dmodal-btn primary" href="#" target="_blank" rel="noopener">Xem thiết kế</a>
+            <button class="dmodal-btn" type="button" data-close>Đóng</button>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="./local.js"></script>
+  </body>
+</html>
