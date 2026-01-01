@@ -130,9 +130,6 @@
                 </button>
               </div>
             </div>
-            <button class="icon-btn" title="Tin nhắn">💬</button>
-            <button class="icon-btn" title="Thông báo">🔔</button>
-            <button class="icon-btn" title="Cài đặt">⚙️</button>
           </div>
         </header>
         <div class="tab-content">
@@ -764,32 +761,48 @@
       </main>
     </div>
     <dialog class="product-modal" id="productModal" aria-label="Chi tiết sản phẩm">
-      <button class="modal-close" type="button" aria-label="Đóng">✕</button>
-
-      <div class="modal-grid">
-        <div class="modal-media">
-          <img class="modal-img" src="" alt="" />
-          <span class="modal-badge" hidden></span>
-        </div>
-
-        <div class="modal-content">
+      <div class="modal-shell">
+        <header class="modal-header">
           <h3 class="modal-title"></h3>
-          <p class="modal-desc"></p>
 
-          <div class="modal-meta"></div>
+          <button class="modal-close" type="button" aria-label="Đóng" data-close>✕</button>
+        </header>
 
-          <div class="modal-row">
-            <div class="modal-label">Tech</div>
-            <div class="modal-tech"></div>
+        <div class="modal-grid">
+          <div class="modal-media">
+            <div class="img-scroll" id="imgScroll">
+              <img class="modal-img" id="modalImg" src="" alt="" />
+            </div>
+
+            <div class="img-zoombar" aria-label="Zoom controls">
+              <button type="button" class="zoom-btn" data-zoom-out>-</button>
+              <span class="zoom-level" id="zoomLevel">100%</span>
+              <button type="button" class="zoom-btn" data-zoom-in>+</button>
+              <button type="button" class="zoom-btn" data-zoom-reset>Reset</button>
+            </div>
+
+            <span class="modal-badge" hidden></span>
           </div>
 
-          <div class="modal-actions">
-            <a class="modal-btn primary" href="#" target="_blank" rel="noopener">Xem demo</a>
-            <button class="modal-btn" type="button" data-close>Đóng</button>
+          <div class="modal-content">
+            <p class="modal-desc"></p>
+            <div class="modal-meta"></div>
+            <div class="modal-section" data-section="features" hidden>
+              <div class="modal-label">Tính năng</div>
+              <ul class="modal-features"></ul>
+            </div>
+            <div class="modal-section" data-section="features" hidden>
+              <div class="modal-label">Tech</div>
+              <div class="modal-tech"></div>
+            </div>
+            <div class="modal-actions">
+              <a class="modal-btn primary" href="#" target="_blank" rel="noopener">Xem demo</a>
+            </div>
           </div>
         </div>
       </div>
     </dialog>
+
     <dialog class="design-modal" id="designModal" aria-label="Chi tiết thiết kế">
       <button class="dmodal-close" type="button" aria-label="Đóng">✕</button>
 

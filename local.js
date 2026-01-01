@@ -620,7 +620,6 @@ function applyOne(skill) {
   const bar = skill.querySelector(".skill-bar");
   if (!valEl || !bar) return false;
 
-  // IMPORTANT: bar phải là mốc
   const cs = getComputedStyle(bar);
   if (cs.position === "static") bar.style.position = "relative";
 
@@ -629,11 +628,9 @@ function applyOne(skill) {
   const fill = skill.querySelector(".skill-fill");
   if (fill) fill.style.width = p + "%";
 
-  // Nếu bar đang bị hidden/collapse => width = 0 => chưa đặt
   const w = bar.getBoundingClientRect().width;
   if (!w) return false;
 
-  // Đặt bubble theo % để tránh lệch do đo px
   valEl.style.position = "absolute";
   valEl.style.left = p + "%";
   valEl.style.transform = "translateX(-50%)";
@@ -645,7 +642,6 @@ function applyAll(scope = document) {
   scope.querySelectorAll(".skill").forEach((s) => applyOne(s));
 }
 
-// chờ tới khi đo được width > 0 (tab/collapse/transition)
 function applyAllWhenReady(scope = document, tries = 60) {
   const skills = [...scope.querySelectorAll(".skill")];
   let okCount = 0;
@@ -661,124 +657,354 @@ function applyAllWhenReady(scope = document, tries = 60) {
   }
 }
 
-// 1) load + DOM ready
 document.addEventListener("DOMContentLoaded", () => applyAllWhenReady());
 window.addEventListener("load", () => applyAllWhenReady());
 
-// 2) font load (nếu có webfont)
 if (document.fonts?.ready) {
   document.fonts.ready.then(() => applyAllWhenReady());
 }
 
-// 3) ResizeObserver: tự cập nhật khi bar đổi width (responsive)
 const ro = new ResizeObserver(() => applyAll());
 window.addEventListener("load", () => {
   document.querySelectorAll(".skill-bar").forEach((bar) => ro.observe(bar));
 });
 
-// 4) Nếu nội dung skills render động (SPA), bắt DOM thay đổi
 const mo = new MutationObserver(() => applyAllWhenReady());
 mo.observe(document.body, { childList: true, subtree: true });
 
 const PRODUCTS = [
   {
-    id: 1,
-    title: "Furniture for the better of home",
-    desc: "Modern, minimal style for living room.",
-    img: "https://picsum.photos/seed/p1/640/420",
-    badge: "SALE",
-    badgeClass: "",
-    price: "$120",
-    type: "Interior",
-    link: "#",
-  },
-  {
-    id: 2,
-    title: "Premium furniture for a better living",
-    desc: "Comfortable & clean design concept.",
-    img: "https://picsum.photos/seed/p2/640/420",
+    id: 101,
+    title: "Mind Map Builder – Thiết kế cấu trúc website",
+    desc: "Mind Map Builder là công cụ trực quan giúp bạn thiết kế cấu trúc website và quy trình công việc theo nhánh một cách rõ ràng. Tạo nhanh các node/case, kéo-thả sắp xếp, đổi màu để phân loại trạng thái/ưu tiên và chỉnh sửa nội dung theo từng bước triển khai. Tích hợp minimap, snap-to-grid, autosave và khôi phục (restore/reset) để bạn làm việc mượt mà, kiểm soát tốt và không lo mất dữ liệu",
+    img: "./mindmap.png",
     badge: "NEW",
-    badgeClass: "is-new",
-    price: "$210",
-    type: "Living",
+    badgeClass: "badge-new",
     link: "#",
+
+    meta: [
+      { label: "Ứng dụng", value: "Blog / Home / Ecommerce" },
+      { label: "Tương tác", value: "Drag & Drop + Zoom" },
+      { label: "Điều hướng", value: "Minimap + Fit view" },
+      { label: "Lưu", value: "Autosave + Restore/Reset" },
+    ],
+
+    features: [
+      "Tạo nhiều Design (Blog, Home, Web bán hàng...)",
+      "Thêm case/node theo nhánh công việc",
+      "Kéo-thả vị trí node, Snap to Grid để căn chỉnh",
+      "Đổi màu node để phân loại trạng thái/ưu tiên",
+      "Chỉnh sửa nội dung node theo trình tự",
+      "Minimap điều hướng sơ đồ lớn",
+    ],
+
+    tech: ["Next.js 15", "TypeScript", "CSS Modules", "Canvas", "Prisma", "MySQL"],
   },
   {
-    id: 3,
-    title: "Modern interior for apartment",
-    desc: "Bright tone, airy layout, elegant.",
-    img: "https://picsum.photos/seed/p3/640/420",
+    id: 102,
+    title: "Technology Dashboard – Báo cáo doanh thu & hiệu suất",
+    desc: "Technology Dashboard là trang tổng quan quản trị giúp bạn theo dõi doanh thu, đơn hàng và hiệu suất theo thời gian thực. Giao diện bố cục rõ ràng gồm sidebar điều hướng + topbar tìm kiếm + hệ thống KPI và biểu đồ phân tích. Hỗ trợ xuất báo cáo (Export), so sánh mục tiêu với thực tế, theo dõi mức độ hài lòng khách hàng theo tuần và phân tích traffic theo tháng. Thiết kế card hiện đại, màu pastel phân nhóm chỉ số giúp đọc nhanh, dễ mở rộng thêm widget/section theo nhu cầu dự án.",
+    img: "./dashboard.png",
     badge: "HOT",
-    badgeClass: "is-hot",
-    price: "$180",
-    type: "Apartment",
+    badgeClass: "badge-hot",
     link: "#",
+
+    meta: [
+      { label: "Loại trang", value: "Admin Dashboard / Control Panel" },
+      { label: "Thành phần", value: "KPI Cards + Charts (Line/Bar)" },
+      { label: "Tính năng", value: "Search (Ctrl+K) + Export report" },
+      { label: "Phân tích", value: "Revenue / Visitor / Target vs Reality" },
+    ],
+
+    features: [
+      "Sidebar điều hướng đa mục (Dashboard, Menu, Database, Resource, Mind Map, Calendar, Pages, Issues...)",
+      "Cụm KPI Today’s Sales: Total Sales, Total Order, Product Sold, New Customers kèm % so với hôm qua",
+      "Customer Satisfaction: biểu đồ xu hướng theo tuần (W1–W4) so sánh Last Month vs This Month",
+      "Total Revenue: biểu đồ cột theo ngày trong tuần (Online/Offline)",
+      "Visitor Insights: biểu đồ nhiều đường theo tháng (Loyal / New / Unique) + mốc highlight",
+      "Target vs Reality: biểu đồ cột so sánh Reality Sales và Target Sales",
+    ],
+
+    tech: ["Next.js 15", "TypeScript", "CSS Modules", "Recharts/Chart.js", "Prisma", "MySQL"],
   },
   {
-    id: 1,
-    title: "Furniture for the better of home",
-    desc: "Modern, minimal style for living room.",
-    img: "https://picsum.photos/seed/p1/640/420",
-    badge: "SALE",
-    badgeClass: "",
-    price: "$120",
-    type: "Interior",
-    link: "#",
-  },
-  {
-    id: 2,
-    title: "Premium furniture for a better living",
-    desc: "Comfortable & clean design concept.",
-    img: "https://picsum.photos/seed/p2/640/420",
+    id: 103,
+    title: "Menu Builder – Thiết kế & quản lý cấu trúc menu website",
+    desc: "Menu Builder là công cụ trực quan giúp bạn xây dựng và quản lý cấu trúc menu website một cách linh hoạt và dễ dàng. Cho phép kéo-thả sắp xếp menu cấp 1, cấp 2 (submenu), phân loại menu theo site, loại website (Blog / eCommerce) và từng vị trí hiển thị (Home, Header…). Hỗ trợ tìm kiếm nhanh menu, load/save dữ liệu từ Database, sao chép JSON và import/export cấu hình menu.",
+    img: "./menu.png",
     badge: "NEW",
-    badgeClass: "is-new",
-    price: "$210",
-    type: "Living",
+    badgeClass: "badge-new",
     link: "#",
+
+    meta: [
+      { label: "Loại trang", value: "Menu Builder / Admin Tool" },
+      { label: "Cấu trúc", value: "Menu cấp 1 & Submenu (Cấp 2)" },
+      { label: "Tương tác", value: "Drag & Drop + Reorder" },
+      { label: "Lưu trữ", value: "Load / Save DB + Import / Export JSON" },
+    ],
+
+    features: [
+      "Tạo và quản lý menu chính cho website (Header / Home / Ecommerce…)",
+      "Kéo-thả item để sắp xếp thứ tự menu trực quan",
+      "Hỗ trợ menu cấp 1 và Submenu cấp 2 (drop item để tạo submenu)",
+      "Phân loại menu theo site, ngôn ngữ và loại website",
+      "Tìm kiếm nhanh menu theo tiêu đề hoặc đường dẫn",
+      "Gợi ý menu mở rộng theo nhóm: Khám phá, Nội dung & SEO, CSKH & Chính sách, Mua hàng",
+      "Copy JSON và Import JSON để đồng bộ ",
+    ],
+
+    tech: ["Next.js 15", "TypeScript", "CSS Modules", "Drag & Drop", "Prisma", "MySQL"],
   },
   {
-    id: 3,
-    title: "Modern interior for apartment",
-    desc: "Bright tone, airy layout, elegant.",
-    img: "https://picsum.photos/seed/p3/640/420",
-    badge: "HOT",
-    badgeClass: "is-hot",
-    price: "$180",
-    type: "Apartment",
+    id: 104,
+    title: "Schema Builder – Quản lý & thiết kế Database trực quan",
+    desc: "Schema Builder là trang quản trị database mạnh mẽ cho phép bạn tạo. Hỗ trợ khai báo model, field, kiểu dữ liệu, index, relation (FK), enum và timestamps. Tích hợp thao tác an toàn Apply (Safe), load schema từ Database, import/export cấu hình và drop bảng có kiểm soát. Phù hợp cho CMS, SaaS và hệ thống quản trị dữ liệu phức tạp.",
+    img: "./schema-builder.png",
+    badge: "BETA",
+    badgeClass: "badge-beta",
     link: "#",
+
+    meta: [
+      { label: "Loại trang", value: "Database / Schema Builder" },
+      { label: "ORM hỗ trợ", value: "Prisma Schema" },
+      { label: "Thao tác", value: "Create / Update / Drop Table" },
+      { label: "An toàn", value: "Apply Safe + Backup / Export" },
+    ],
+
+    features: [
+      "Tạo và chỉnh sửa Schema / Model database trực quan qua UI",
+      "Khai báo field với đầy đủ thuộc tính: type, length, nullable, default, index",
+      "Hỗ trợ auto increment, primary key, unique index và composite index",
+      "Tạo và quản lý quan hệ bảng (Foreign Key, relation name, onDelete Cascade)",
+      "Auto infer cột FK theo relation để giảm lỗi cấu hình",
+      "Apply (Safe) để cập nhật schema có kiểm soát, hạn chế rủi ro mất dữ liệu",
+      "Import / Export schema để backup, migrate hoặc đồng bộ môi trường. Hỗ trợ Advanced JSON để tùy chỉnh nâng cao trước khi Create",
+    ],
+
+    tech: ["Next.js 15", "TypeScript", "CSS Modules", "Prisma", "MySQL"],
   },
   {
-    id: 1,
-    title: "Furniture for the better of home",
-    desc: "Modern, minimal style for living room.",
-    img: "https://picsum.photos/seed/p1/640/420",
-    badge: "SALE",
-    badgeClass: "",
-    price: "$120",
-    type: "Interior",
+    id: 105,
+    title: "Data Manager – Tự động sinh API & CRUD Page từ Database",
+    desc: "Data Manager là trang quản lý dữ liệu động được sinh tự động từ database schema. Mỗi khi tạo model trong database, hệ thống sẽ tự động generate API (CRUD) và giao diện quản trị dữ liệu tương ứng.",
+    img: "./data-manager.png",
+    badge: "AUTO",
+    badgeClass: "badge-auto",
     link: "#",
+
+    meta: [
+      { label: "Loại trang", value: "Data Manager / CRUD Page" },
+      { label: "Nguồn dữ liệu", value: "Auto-generate từ Database Schema" },
+      { label: "API", value: "Auto REST API (Create / Read / Update / Delete)" },
+      { label: "Tương tác", value: "Inline Edit + Dynamic Form" },
+    ],
+
+    features: [
+      "Tự động sinh API CRUD ngay khi tạo database/model",
+      "Tự động tạo trang quản lý dữ liệu (Data Page) theo schema",
+      "Hiển thị dữ liệu dạng bảng (table) với phân trang và tìm kiếm",
+      "Click trực tiếp vào input/field để mở form chỉnh sửa chi tiết",
+      "Chỉnh sửa (Edit) và xoá (Delete) bản ghi ngay trên từng dòng",
+      "Tự map field theo kiểu dữ liệu (text, number, price, status, image, metadata…)",
+      "Hỗ trợ hiển thị ảnh, slug, category, trạng thái và position",
+      "Đồng bộ realtime với database sau khi create/update/delete",
+      "Giảm tối đa code thủ công khi build admin & CMS",
+    ],
+
+    tech: ["Next.js 15", "TypeScript", "CSS Modules", "Prisma", "MySQL", "Auto CRUD Generator"],
   },
   {
-    id: 2,
-    title: "Premium furniture for a better living",
-    desc: "Comfortable & clean design concept.",
-    img: "https://picsum.photos/seed/p2/640/420",
-    badge: "NEW",
-    badgeClass: "is-new",
-    price: "$210",
-    type: "Living",
+    id: 106,
+    title: "Site Builder – Tự động tạo Page & cấu hình website từ Menu",
+    desc: "Site Builder là công cụ cấu hình website và quản lý page động, cho phép tự động sinh trang ngay sau khi tạo menu. Mỗi menu sẽ tạo ra path tương ứng theo locale (vi/en/…), đồng thời sinh page ở trạng thái draft để chỉnh sửa nội dung và SEO. Hỗ trợ quản lý danh sách page theo ngôn ngữ, preview trước khi publish, cấu hình SEO chi tiết, sitemap và structured data (JSON-LD). Phù hợp để xây dựng website, landing page, blog hoặc ecommerce mà không cần code thủ công.",
+    img: "./site-builder.png",
+    badge: "CORE",
+    badgeClass: "badge-core",
     link: "#",
+
+    meta: [
+      { label: "Loại trang", value: "Site Builder / Page Manager" },
+      { label: "Nguồn tạo", value: "Auto-generate từ Menu & Path" },
+      { label: "Đa ngôn ngữ", value: "Locale-based (vi / en / …)" },
+      { label: "SEO", value: "Meta / Sitemap / JSON-LD" },
+    ],
+
+    features: [
+      "Tự động tạo Page ngay sau khi tạo Menu",
+      "Sinh đường dẫn (path) theo menu, locale và cấu hình site",
+      "Hệ thống SEO đầy đủ: Meta Title, Meta Description, Keywords, Canonical URL",
+      "Cấu hình noindex / nofollow cho từng page",
+      "Thiết lập Sitemap (changefreq, priority) cho SEO",
+      "Tự động gợi ý (Autocomplete) nội dung SEO. Preview page trước khi Publish",
+      "Các hành động nhanh: Edit, Publish, Duplicate, Delete Đóng vai trò trung tâm để cấu hình & xuất bản toàn bộ website",
+    ],
+
+    tech: ["Next.js 15", "TypeScript", "CSS Modules", "Dynamic Routing", "SEO Tools", "Prisma", "MySQL"],
   },
   {
-    id: 3,
-    title: "Modern interior for apartment",
-    desc: "Bright tone, airy layout, elegant.",
-    img: "https://picsum.photos/seed/p3/640/420",
-    badge: "HOT",
-    badgeClass: "is-hot",
-    price: "$180",
-    type: "Apartment",
+    id: 107,
+    title: "Page Builder – Thiết kế giao diện trang từ Template có sẵn",
+    desc: "Page Builder là công cụ thiết kế giao diện trang web trực quan, cho phép xây dựng page nhanh chóng từ hệ thống template và block có sẵn. Người dùng có thể kéo-thả các thành phần (Header, Topbar, Section, Block…) vào canvas, chỉnh sửa nội dung theo từng block và xem trước giao diện theo thời gian thực. Phù hợp để tạo landing page, trang sản phẩm, blog hoặc giao diện ecommerce mà không cần viết code.",
+    img: "./page-builder.png",
+    badge: "PRO",
+    badgeClass: "badge-pro",
     link: "#",
+
+    meta: [
+      { label: "Loại trang", value: "Page Builder / UI Editor" },
+      { label: "Thiết kế", value: "Template-based + Drag & Drop" },
+      { label: "Chỉnh sửa", value: "Block-level Editing" },
+      { label: "Xuất bản", value: "Preview / Publish" },
+    ],
+
+    features: [
+      "Thiết kế giao diện page trực quan trên canvas",
+      "Sử dụng template có sẵn cho Header, Topbar và các section",
+      "Kéo-thả block từ thư viện Elements vào trang",
+      "Thư viện template đa dạng (Topbar, Header, Theme màu, Layout)",
+      "Hỗ trợ biến (Variables) để tái sử dụng dữ liệu",
+      "Tìm kiếm nhanh block/element trong thư viện",
+      "Lưu thay đổi và Publish page chỉ với một thao tác",
+      "Kết hợp liền mạch với Menu, Site Builder và SEO configuration",
+    ],
+
+    tech: ["Next.js 15", "TypeScript", "CSS Modules", "Drag & Drop Engine", "Component-based UI", "Prisma", "MySQL"],
+  },
+  {
+    id: 108,
+    title: "Issue Manager – Quản lý công việc & lỗi hệ thống",
+    desc: "Issue Manager là trang quản lý công việc và lỗi (issue tracking) giúp theo dõi tiến độ, trạng thái và trách nhiệm của từng task trong hệ thống. Cung cấp danh sách issue dạng bảng với bộ lọc nâng cao theo trạng thái, loại issue, người phụ trách và từ khóa. Phù hợp cho quản lý dự án, theo dõi bug, task UI/UX và vận hành hệ thống nội bộ.",
+    img: "./issue-list.png",
+    badge: "CORE",
+    badgeClass: "badge-core",
+    link: "#",
+
+    meta: [
+      { label: "Loại trang", value: "Issue Tracker / Task Manager" },
+      { label: "Tìm kiếm", value: "Quick Search + Advanced Search" },
+      { label: "Trạng thái", value: "Open / In Progress / Resolved / Not Closed" },
+      { label: "Quản lý", value: "Assignee / Priority / Milestone" },
+    ],
+
+    features: [
+      "Danh sách issue hiển thị dạng bảng rõ ràng, dễ theo dõi",
+      "Lọc issue nhanh theo trạng thái (All, Open, In Progress, Resolved, Not Closed)",
+      "Advanced Search theo loại issue, assignee và keyword. Phân loại issue theo type (Task, Bug, Feature…)",
+      "Quản lý người phụ trách (Assignee) trực quan bằng avatar, Theo dõi milestone, thời gian bắt đầu và deadline",
+      "Cảnh báo deadline bằng màu sắc (Due date), Ghi nhận người tạo issue (Registered by)",
+      "Liên kết chặt chẽ với Kanban Board để quản lý theo workflow",
+      "Phù hợp cho quản lý công việc, bug tracking và vận hành dự án",
+    ],
+
+    tech: ["Next.js 15", "TypeScript", "CSS Modules", "Table & Filter Engine", "Prisma", "MySQL"],
+  },
+  {
+    id: 109,
+    title: "Kanban Board – Quản lý Issue theo quy trình trực quan",
+    desc: "Kanban Board là giao diện quản lý công việc và issue theo luồng trực quan, giúp đội nhóm theo dõi tiến độ task một cách rõ ràng từ Open đến Resolved. Các issue được hiển thị dưới dạng card và phân bổ theo từng cột trạng thái, hỗ trợ kéo-thả để cập nhật trạng thái nhanh chóng. Phù hợp cho quản lý task, bug tracking và tối ưu workflow trong dự án.",
+    img: "./kanban-board.png",
+    badge: "CORE",
+    badgeClass: "badge-core",
+    link: "#",
+
+    meta: [
+      { label: "Loại trang", value: "Kanban Board / Issue Workflow" },
+      { label: "Quy trình", value: "Open → In Progress → Resolved → Not Closed" },
+      { label: "Tương tác", value: "Drag & Drop Card" },
+      { label: "Quản lý", value: "Priority / Assignee / Due date" },
+    ],
+
+    features: [
+      "Hiển thị issue dạng Kanban theo từng cột trạng thái",
+      "Hỗ trợ các trạng thái: Open, In Progress, Resolved, Not Closed",
+      "Kéo-thả card giữa các cột để cập nhật trạng thái nhanh. Tạo issue mới trực tiếp trong từng cột (+ Add New)",
+      "Thanh tìm kiếm theo subject, key, category, assignee. Bộ lọc theo priority và issue type",
+      "Card issue hiển thị đầy đủ thông tin: key, tiêu đề, type, priority, deadline. Hiển thị người phụ trách (assignee) và thời hạn xử lý",
+      "Quick actions ngay trên card (xem chi tiết, chỉnh sửa). Import / Export danh sách issue",
+      "Liên kết chặt chẽ với Issue List để quản lý tổng quan và chi tiết",
+    ],
+
+    tech: ["Next.js 15", "TypeScript", "CSS Modules", "Drag & Drop Engine", "Prisma", "MySQL"],
+  },
+  {
+    id: 110,
+    title: "Issue Editor – Tạo & quản lý Issue chi tiết",
+    desc: "Issue Editor là trang tạo và chỉnh sửa issue chi tiết, hỗ trợ đầy đủ thông tin từ mô tả, phân loại đến thời gian và người phụ trách. Cung cấp trình soạn thảo nội dung mạnh mẽ để ghi rõ bối cảnh, bước thực hiện và kết quả mong đợi/thực tế. Tích hợp template, đính kèm file, thông báo người liên quan và xem trước nhanh để đảm bảo issue được tạo rõ ràng, nhất quán và dễ theo dõi trong suốt vòng đời xử lý.",
+    img: "./issue-editor.png",
+    badge: "CORE",
+    badgeClass: "badge-core",
+    link: "#",
+
+    meta: [
+      { label: "Loại trang", value: "Issue Editor / Task Detail" },
+      { label: "Soạn thảo", value: "Rich Text Editor (Markdown/WYSIWYG)" },
+      { label: "Quản lý", value: "Assignee / Status / Priority" },
+      { label: "Theo dõi", value: "Estimate / Actual / Timeline" },
+    ],
+
+    features: [
+      "Trình soạn thảo nội dung rich text để mô tả chi tiết issue. Hỗ trợ template để tạo issue nhanh và đồng bộ",
+      "Khai báo đầy đủ thông tin: Summary, Key, Parent Issue, Version. Phân loại issue theo Type (Task/Bug/Feature), Category và Milestone",
+      "Thiết lập Priority và Status ngay khi tạo issue. Quản lý người phụ trách (Assignee) linh hoạt",
+      "Theo dõi thời gian: Start date, Due date, Estimated hours, Actual hours. Tích hợp đính kèm file (Attachments) qua upload API",
+      "Chọn và thông báo người liên quan (Notified users). Xem trước nhanh (Quick preview) nội dung issue",
+      "Gợi ý và mẹo thao tác nhanh (Ctrl + #, template). Liên kết chặt chẽ với Issue List và Kanban Board",
+    ],
+
+    tech: ["Next.js 15", "TypeScript", "CSS Modules", "Rich Text Editor", "Prisma", "MySQL"],
+  },
+  {
+    id: 111,
+    title: "System Settings – Cấu hình toàn bộ website & hệ thống",
+    desc: "System Settings là trung tâm cấu hình toàn bộ website và hệ thống, cho phép quản trị viên thiết lập từ thông tin site, domain, đa ngôn ngữ đến branding, SEO, email, bảo mật và hiệu năng. Giao diện chia theo từng tab rõ ràng giúp cấu hình nhanh, đồng bộ và dễ mở rộng. Phù hợp cho CMS, SaaS Platform và Website Builder chuyên nghiệp.",
+    img: "./system-settings.png",
+    badge: "CORE",
+    badgeClass: "badge-core",
+    link: "#",
+
+    meta: [
+      { label: "Loại trang", value: "System Settings / Site Configuration" },
+      { label: "Phạm vi", value: "Global Website & App Settings" },
+      { label: "Đa ngôn ngữ", value: "Locale / i18n Support" },
+      { label: "Vận hành", value: "SEO / Email / Security / Performance" },
+    ],
+
+    features: [
+      "Cấu hình thông tin website: site name, tagline, locale, timezone, currency. Thiết lập domain, subdomain, canonical URL và Asset/CDN domain",
+      "Quản lý đa ngôn ngữ (default locale, supported locales CSV). Tùy chỉnh branding nhanh: theme mode, màu primary/secondary/accent, radius, density",
+      "Cấu hình layout toàn cục: container, max width, breadcrumbs. Quản lý SEO & Analytics: meta mặc định, tracking, sitemap. Cấu hình Email (SMTP) cho hệ thống thông báo. Thiết lập Authentication & Security (Auth/Sec)",
+      "Quản lý Storage & CDN cho asset. Quản lý ENV & Feature Flags. Chế độ Maintenance để bảo trì hệ thống",
+      "Hỗ trợ Export / Import cấu hình để backup hoặc migrate. Đồng bộ cấu hình nhanh giữa các môi trường (Synced)",
+    ],
+
+    tech: ["Next.js 15", "TypeScript", "CSS Modules", "Config Management", "Prisma", "MySQL"],
+  },
+  {
+    id: 112,
+    title: "User Management – Quản lý người dùng & phân quyền",
+    desc: "User Management là trang quản trị người dùng giúp kiểm soát vai trò, quyền hạn và trạng thái hoạt động trong hệ thống. Giao diện hiển thị người dùng dạng card trực quan theo từng role (Admin, Editor, Normal User), cho phép tìm kiếm nhanh theo tên, email hoặc quyền, bật/tắt trạng thái và quản lý quyền truy cập một cách rõ ràng. Phù hợp cho hệ thống CMS, SaaS và nền tảng quản trị đa người dùng.",
+    img: "./user-management.png",
+    badge: "CORE",
+    badgeClass: "badge-core",
+    link: "#",
+
+    meta: [
+      { label: "Loại trang", value: "User Management / Access Control" },
+      { label: "Phân quyền", value: "Role-based (Admin / Editor / User)" },
+      { label: "Trạng thái", value: "Active / Disabled" },
+      { label: "Quản lý", value: "User / Role / Visibility" },
+    ],
+
+    features: [
+      "Danh sách người dùng hiển thị dạng card trực quan",
+      "Phân loại người dùng theo vai trò: Admin, Editor, Normal User",
+      "Hiển thị thông tin cơ bản: avatar, email, role, trạng thái hoạt động. Gắn nhãn trạng thái (Active) và thời điểm tham gia (Joined recently)",
+      "Tìm kiếm nhanh theo tên, email hoặc role (phím /). Sắp xếp (Sort) và lọc người dùng theo trạng thái active/disabled",
+      "Quản lý quyền truy cập và phạm vi hiển thị của từng role. Theo dõi số lượng project và team mà user tham gia",
+      "Thao tác nhanh trên user: chỉnh sửa, khóa/vô hiệu hóa. Phù hợp cho hệ thống đa người dùng và phân quyền chi tiết",
+    ],
+
+    tech: ["Next.js 15", "TypeScript", "CSS Modules", "RBAC (Role-Based Access Control)", "Auth & Permission System", "Prisma", "MySQL"],
   },
 ];
 
@@ -803,12 +1029,6 @@ function renderProducts(list) {
             <a href="${escapeHtml(p.link || "#")}">${escapeHtml(p.title)}</a>
           </h3>
           <p class="product-desc">${escapeHtml(p.desc)}</p>
-
-          <div class="product-meta">
-            <span class="product-price">${escapeHtml(p.price || "")}</span>
-            <span class="product-dot">•</span>
-            <span class="product-type">${escapeHtml(p.type || "")}</span>
-          </div>
         </div>
       </article>
     `
@@ -817,9 +1037,7 @@ function renderProducts(list) {
 }
 
 renderProducts(PRODUCTS);
-
 const modal = document.getElementById("productModal");
-
 const $ = (sel) => modal.querySelector(sel);
 
 const elTitle = $(".modal-title");
@@ -828,7 +1046,20 @@ const elImg = $(".modal-img");
 const elMeta = $(".modal-meta");
 const elTech = $(".modal-tech");
 const elBadge = $(".modal-badge");
-const elDemo = $(".modal-actions a.primary");
+
+const elDemo = $(".modal-actions a.modal-btn.primary");
+
+const elFeatureSection = $('.modal-section[data-section="features"]');
+const elFeatures = $(".modal-features");
+
+function escapeHtml(str) {
+  return String(str ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
 
 function openProduct(product) {
   if (elTitle) elTitle.textContent = product.title || "";
@@ -839,19 +1070,63 @@ function openProduct(product) {
     elImg.alt = product.title || "Product";
   }
 
-  if (elMeta) elMeta.textContent = product.meta || "";
+  if (elMeta) {
+    if (Array.isArray(product.meta)) {
+      elMeta.innerHTML = product.meta
+        .map(
+          (m) => `
+          <div class="meta-card">
+            <div class="meta-k">${escapeHtml(m.label)}</div>
+            <div class="meta-v">${escapeHtml(m.value)}</div>
+          </div>
+        `
+        )
+        .join("");
+    } else if (product.meta) {
+      elMeta.innerHTML = `
+        <div class="meta-card">
+          <div class="meta-k">Thông tin</div>
+          <div class="meta-v">${escapeHtml(product.meta)}</div>
+        </div>
+      `;
+    } else {
+      elMeta.innerHTML = "";
+    }
+  }
+  if (elFeatureSection && elFeatures) {
+    if (Array.isArray(product.features) && product.features.length) {
+      elFeatureSection.hidden = false;
+      elFeatures.innerHTML = product.features.map((f) => `<li>${escapeHtml(f)}</li>`).join("");
+    } else {
+      elFeatureSection.hidden = true;
+      elFeatures.innerHTML = "";
+    }
+  }
 
-  if (elTech) elTech.textContent = product.tech || "—";
+  // ✅ TECH: chip nếu là mảng
+  if (elTech) {
+    if (Array.isArray(product.tech)) {
+      elTech.innerHTML = product.tech.map((t) => `<span class="tech-chip">${escapeHtml(t)}</span>`).join("");
+    } else {
+      // nếu tech là string
+      const t = product.tech || "—";
+      elTech.innerHTML = `<span class="tech-chip">${escapeHtml(t)}</span>`;
+    }
+  }
 
+  // ✅ BADGE + badgeClass
   if (elBadge) {
     if (product.badge) {
       elBadge.textContent = product.badge;
       elBadge.hidden = false;
+      elBadge.className = `modal-badge ${product.badgeClass || ""}`.trim();
     } else {
       elBadge.hidden = true;
+      elBadge.className = "modal-badge";
     }
   }
 
+  // ✅ DEMO LINK
   if (elDemo) {
     if (product.link && product.link !== "#") {
       elDemo.href = product.link;
@@ -864,6 +1139,7 @@ function openProduct(product) {
   modal.showModal();
 }
 
+// Click card -> open
 document.addEventListener("click", function (e) {
   const card = e.target.closest(".product-card");
   if (!card) return;
@@ -878,16 +1154,98 @@ document.addEventListener("click", function (e) {
   openProduct(product);
 });
 
-const closeBtn = modal.querySelector(".modal-close");
-if (closeBtn) closeBtn.addEventListener("click", () => modal.close());
-
-const closeBtn2 = modal.querySelector("[data-close]");
-if (closeBtn2) closeBtn2.addEventListener("click", () => modal.close());
+modal.querySelectorAll("[data-close], .modal-close").forEach((btn) => {
+  btn.addEventListener("click", () => modal.close());
+});
 
 modal.addEventListener("click", (e) => {
-  const rect = modal.getBoundingClientRect();
-  const inside = e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
-  if (!inside) modal.close();
+  if (e.target === modal) modal.close();
+});
+
+const imgScroll = document.getElementById("imgScroll");
+const modalImgEl = document.getElementById("modalImg");
+const zoomLevelEl = document.getElementById("zoomLevel");
+
+let zoom = 1;
+const ZOOM_MIN = 0.25;
+const ZOOM_MAX = 4;
+const ZOOM_STEP = 0.1;
+
+function clamp(n, a, b) {
+  return Math.max(a, Math.min(b, n));
+}
+
+function setZoom(nextZoom, keepCenter = true) {
+  nextZoom = clamp(nextZoom, ZOOM_MIN, ZOOM_MAX);
+
+  // giữ tâm (center) để zoom không bị “nhảy”
+  let cx = 0,
+    cy = 0,
+    oldW = 0,
+    oldH = 0;
+  if (keepCenter) {
+    cx = imgScroll.scrollLeft + imgScroll.clientWidth / 2;
+    cy = imgScroll.scrollTop + imgScroll.clientHeight / 2;
+    oldW = modalImgEl.clientWidth;
+    oldH = modalImgEl.clientHeight;
+  }
+
+  zoom = nextZoom;
+
+  // quan trọng: set width theo naturalWidth * zoom để scroll hoạt động đúng
+  const nw = modalImgEl.naturalWidth || modalImgEl.width || 1;
+  modalImgEl.style.width = `${nw * zoom}px`;
+  modalImgEl.style.height = "auto";
+
+  if (zoomLevelEl) zoomLevelEl.textContent = `${Math.round(zoom * 100)}%`;
+
+  if (keepCenter) {
+    // sau khi đổi size, tính lại tỉ lệ để giữ tâm
+    const newW = modalImgEl.clientWidth;
+    const newH = modalImgEl.clientHeight;
+
+    if (oldW && oldH) {
+      const rx = newW / oldW;
+      const ry = newH / oldH;
+      imgScroll.scrollLeft = cx * rx - imgScroll.clientWidth / 2;
+      imgScroll.scrollTop = cy * ry - imgScroll.clientHeight / 2;
+    }
+  }
+}
+
+function resetZoom() {
+  setZoom(1, false);
+  imgScroll.scrollLeft = 0;
+  imgScroll.scrollTop = 0;
+}
+
+// Buttons
+document.querySelectorAll("[data-zoom-in]").forEach((btn) => {
+  btn.addEventListener("click", () => setZoom(zoom + ZOOM_STEP));
+});
+document.querySelectorAll("[data-zoom-out]").forEach((btn) => {
+  btn.addEventListener("click", () => setZoom(zoom - ZOOM_STEP));
+});
+document.querySelectorAll("[data-zoom-reset]").forEach((btn) => {
+  btn.addEventListener("click", resetZoom);
+});
+
+// Ctrl + wheel để zoom (giống Google Maps)
+imgScroll.addEventListener(
+  "wheel",
+  (e) => {
+    if (!e.ctrlKey) return; // chỉ zoom khi giữ Ctrl
+    e.preventDefault();
+
+    const delta = e.deltaY > 0 ? -ZOOM_STEP : ZOOM_STEP;
+    setZoom(zoom + delta);
+  },
+  { passive: false }
+);
+
+// Khi ảnh load xong, reset zoom
+modalImgEl.addEventListener("load", () => {
+  resetZoom();
 });
 
 const DESIGN_LIST = [
