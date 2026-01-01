@@ -1006,6 +1006,71 @@ const PRODUCTS = [
 
     tech: ["Next.js 15", "TypeScript", "CSS Modules", "RBAC (Role-Based Access Control)", "Auth & Permission System", "Prisma", "MySQL"],
   },
+  {
+    id: 113,
+    title: "Report Designer – Thiết kế báo cáo & biểu mẫu in ấn",
+    desc: "Report Designer là công cụ thiết kế báo cáo chuyên nghiệp, cho phép xây dựng các biểu mẫu in ấn phức tạp như danh sách, hóa đơn, báo cáo thống kê và chứng từ. Giao diện dạng WYSIWYG giúp kéo-thả, căn chỉnh chính xác từng field, hỗ trợ header/footer, group, detail và footer theo nhiều cấp. Phù hợp cho hệ thống ERP, kế toán, bán hàng và quản trị doanh nghiệp cần báo cáo chuẩn form.",
+    img: "./report-designer.png",
+    badge: "PRO",
+    badgeClass: "badge-pro",
+    link: "#",
+
+    meta: [
+      { label: "Loại trang", value: "Report Designer / Print Layout" },
+      { label: "Thiết kế", value: "WYSIWYG + Grid-based" },
+      { label: "Cấu trúc", value: "Header / Group / Detail / Footer" },
+      { label: "Script", value: "VB.NET Expression" },
+    ],
+
+    features: [
+      "Thiết kế báo cáo trực quan theo dạng WYSIWYG",
+      "Hỗ trợ đầy đủ các section: Report Header, Page Header, Group Header, Detail, Group Footer, Page Footer, Report Footer",
+      "Cho phép tạo nhiều cấp Group (GroupHeader1–n) để phân nhóm dữ liệu",
+      "Kéo-thả các control: Label, TextBox, CheckBox, RichTextBox, Picture, Line, Shape, Barcode, Chart",
+      "Căn chỉnh chính xác theo lưới (grid) và ruler",
+      "Binding dữ liệu trực tiếp từ DataSource / DataMember",
+      "Hỗ trợ expression và script (VB.NET) để xử lý logic hiển thị",
+      "Tự động đánh số trang, ngày giờ in, tổng hợp (sum/count)",
+      "Thiết kế form phù hợp in A4 / chiều ngang / dọc",
+      "Xem trước (Preview) báo cáo trước khi in hoặc export",
+      "Phù hợp cho báo cáo danh sách, hóa đơn, phiếu xuất/nhập, chứng từ",
+    ],
+
+    tech: ["VB.NET", "Report Engine", "Expression Engine", "Data Binding", "Print & Export System"],
+  },
+  {
+    id: 114,
+    title: "Form Designer – Thiết kế biểu mẫu & chứng từ in ấn chính xác",
+    desc: "Form Designer là công cụ thiết kế biểu mẫu in ấn chuyên sâu, cho phép xây dựng các form, slip, label và chứng từ với độ chính xác cao theo đơn vị mm. Hỗ trợ thiết kế trên khổ giấy A4, tùy chỉnh chiều ngang/dọc, kiểm soát từng tọa độ (X/Y), màu sắc và dữ liệu hiển thị. Phù hợp cho hệ thống bán lẻ, logistics, kế toán và nghiệp vụ cần form chuẩn theo mẫu quy định.",
+    img: "./form-designer.png",
+    badge: "PRO",
+    badgeClass: "badge-pro",
+    link: "#",
+
+    meta: [
+      { label: "Loại trang", value: "Form Designer / Print Layout Tool" },
+      { label: "Định dạng", value: "A4 / Landscape / Portrait" },
+      { label: "Độ chính xác", value: "Millimeter-based Positioning" },
+      { label: "Lưu trữ", value: "XML Template" },
+    ],
+
+    features: [
+      "Thiết kế form in ấn dạng WYSIWYG với ruler và grid",
+      "Hỗ trợ khổ giấy A4, xoay ngang (Landscape) hoặc dọc",
+      "Căn chỉnh chính xác theo tọa độ X/Y (mm)",
+      "Quản lý thuộc tính chi tiết qua Property Editor",
+      "Hỗ trợ nhiều layer và cấu trúc form (Common, Page)",
+      "Thiết kế nhiều dòng dữ liệu (multi-row) với vùng lặp",
+      "Hỗ trợ text, label, line, shape và field dữ liệu",
+      "Tô màu nền theo từng block để phân vùng dữ liệu",
+      "Binding dữ liệu động theo field nghiệp vụ",
+      "Hỗ trợ multi-page, page break và auto break",
+      "Quản lý template dưới dạng file XML",
+      "Phù hợp cho hóa đơn, phiếu giao hàng, chứng từ, label",
+    ],
+
+    tech: ["XML Template Engine", "Form Layout Engine", "Print Rendering", "Coordinate-based Positioning"],
+  },
 ];
 
 const grid = document.getElementById("productGrid");
